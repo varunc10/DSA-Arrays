@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        multiset<int> s(nums.begin(),nums.end());
+        int i=s.count(0);
+        int j=s.count(1);
+        int k=s.count(2);
+        int l=0;
+        while(i){
+            nums[l]=0;
+            i--;
+            l++;
+        }
+        while(j){
+            nums[l]=1;
+            j--;
+            l++;
+        }
+        while(k){
+            nums[l]=2;
+            k--;
+            l++;
+        }
+    }
+};
