@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int i=0;
+        int j=0;
+        int n=matrix.size()-1;
+        int m=matrix.size()-1;
+        while(n){
+            for(j=i;j<n;j++){
+                swap(matrix[i][j],matrix[j][m-i]);
+                swap(matrix[i][j],matrix[m-i][m-j]);
+                swap(matrix[i][j],matrix[m-j][i]);
+            }
+            n=n-1;
+            i++;
+        }
+    }
+};
