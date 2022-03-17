@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        bool flag=false;
+        sort(nums.begin(),nums.end());
+        //the commented out part is the secind solution implemented using set and new vector v, replace nums with v and remove the nums[i]!=nums[i+1].
+        //set<int> s(nums.begin(),nums.end());
+        //vector<int> v(s.begin(),s.end());
+        int count=1;
+        int maxcount=1;
+        for(int i=0;i+1<nums.size();i++){
+            if(nums[i]!=nums[i+1]){
+                if(nums[i+1]-nums[i]==1){
+                    count++;
+                }
+                else{
+                    flag=true;
+                    maxcount=max(maxcount,count);
+                    count=1;
+                }
+            }
+        }
+        maxcount=max(maxcount,count);
+        if(!flag){
+            return count;
+        }
+        return maxcount;
+    }
+};
