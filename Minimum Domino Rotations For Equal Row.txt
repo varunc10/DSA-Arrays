@@ -1,0 +1,56 @@
+class Solution {
+public:
+    int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
+        map<int,int> m1;
+        map<int,int> m2;
+        for(auto i:tops){
+            m1[i]++;
+        }
+        for(auto j:bottoms){
+            m2[j]++;
+        }
+        bool flag=false;
+        auto it1=m1.begin();
+        auto it2=m2.begin();
+        while(it1!=m1.end()&&it2!=m2.end()){
+            if(it1->first==it2->first){
+                if(it1->second+it2->second>=tops.size()){
+                    flag=true;
+                    break;
+                }
+                else{
+                    it1++;
+                    it2++;
+                }
+            }
+            else if(it1->first>it2->first){
+                it2++;
+            }
+            else{
+                it1++;
+            }
+        }
+        set<int> s;
+        int count1=0;
+        for(int i=0;i<tops.size();i++){
+            if(it1->first==tops[i]){
+                s.insert(i);
+                count1++;
+            }
+        }
+        int count2=0;
+        for(int j=0;j<bottoms.size();j++){
+            if(it1->first==bottoms[j]){
+                s.insert(j);
+                count2++;
+            }
+        }
+        int k=max(count1,count2);
+        if(flag){
+            if(s.size()==tops.size()){
+                return tops.size()-k;
+            }
+        }
+        return -1;
+    }
+};
