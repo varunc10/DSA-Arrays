@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int threeSumMulti(vector<int>& arr, int target) {
+        int mod=1000000007;
+        sort(arr.begin(),arr.end());
+        int i=0;
+        int end=arr.size()-1;
+        long count=0;
+        while(i<end){
+            int j=i+1;
+            int k=end;
+            while(j<k){
+                if(arr[i]+arr[j]+arr[k]<target){
+                    j++;
+                }
+                else if(arr[i]+arr[j]+arr[k]>target){
+                    k--;
+                }
+                else if(arr[j]!=arr[k]){
+					int l=1,r=1;
+					while(j+1<k&&arr[j]==arr[j+1]){
+                        j++;
+                        l++;
+                    } 
+					while(k-1>=j&&arr[k]==arr[k-1]){
+                        k--;
+                        r++;
+                    } 
+					count+=(l*r)%mod;
+					j++;
+                    k--;
+				}   
+                else{
+					count+=((k-j)*(k-j+1))/2;
+                    count=count%mod;
+                    break;
+				}
+            }
+            i++;
+        }
+        return (int)count;
+    }
+};
