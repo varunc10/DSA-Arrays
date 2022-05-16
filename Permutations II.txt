@@ -1,0 +1,47 @@
+class Solution {
+public:
+    bool fin=false;
+    int fact(int n){
+        if(n==0||n==1){
+            return 1;
+        }
+        return n*fact(n-1);
+    }
+    void next(vector<int>& nums,set<vector<int>>& s){//vector<int>& end){
+        int i=0;
+        int j=0;
+        bool flag=false;
+        int n=nums.size();
+        for(i=n-1;i-1>=0;i--){
+            if(nums[i]>nums[i-1]){
+                flag=true;
+                break;
+            }
+        }
+        if(flag==false){
+            sort(nums.begin(),nums.end());
+            s.insert(nums);
+            // ans.push_back(nums);
+            return;
+        }
+        reverse(nums.begin()+i,nums.end());
+        for(j=i;j<n;j++){
+            if(nums[j]>nums[i-1]){
+                swap(nums[j],nums[i-1]);
+                break;
+            }
+        }
+        s.insert(nums);
+        // ans.push_back(nums);
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        set<vector<int>> s;
+        s.insert(nums);
+        for(int i=1;i<fact(nums.size());i++){
+            next(nums,s);
+        }
+        vector<vector<int>> ans(s.begin(),s.end());
+        return ans;
+        
+    }
+};
