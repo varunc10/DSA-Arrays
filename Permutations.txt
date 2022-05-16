@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int fact(int n){
+        if(n==0||n==1){
+            return 1;
+        }
+        return n*fact(n-1);
+    }
+    void next(vector<int>& nums,vector<vector<int>>& ans){
+        bool flag=false;
+        int i=0;
+        int j=0;
+        int n=nums.size();
+        for(i=n-1;i-1>=0;i--){
+            if(nums[i]>nums[i-1]){
+                flag=true;
+                break;
+            }
+        }
+        if(flag==false){
+            sort(nums.begin(),nums.end());
+            ans.push_back(nums);
+            return;
+        }
+        reverse(nums.begin()+i,nums.end());
+        for(j=i;j<n;j++){
+            if(nums[j]>nums[i-1]){
+                swap(nums[j],nums[i-1]);
+                break;
+            }
+        }
+        ans.push_back(nums);
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        ans.push_back(nums);
+        for(int i=1;i<fact(nums.size());i++){
+            next(nums,ans);
+        }
+        return ans;
+    }
+};
