@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        // vector<int> indices;
+        // int count=0;
+        // int i=0,j=nums.size()-1;
+        // set<int> s;
+        // for(int i=0;i<nums.size();i++){
+        //     for(int j=i+1;j<nums.size();j++){
+        //         if(abs(nums[j]-nums[i])==k&&j>i){
+        //             s.insert(nums[i]+nums[j]);
+        //         }
+        //     }
+        // }
+        // return s.size();
+        sort(nums.begin(),nums.end());
+        unordered_set<int> s;
+        for(int i=0;i<nums.size()-1;i++){
+            if(binary_search(nums.begin()+i+1,nums.end(),nums[i]+k)){
+                s.insert(nums[i]);
+            }
+        }
+        return s.size();
+    }
+};
