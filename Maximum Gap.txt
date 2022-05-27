@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        // if(nums.size()<2){
+        //     return 0;
+        // }
+        // vector<int> v=nums;
+        // int max1=INT_MIN;
+        // for(auto i:nums){
+        //     if(i>max1){
+        //         max1=i;
+        //     }
+        // }
+        // vector<int> freq(max1+1,0);
+        // for(auto i:nums){
+        //     freq[i]++;
+        // }
+        // for(int i=1;i<freq.size();i++){
+        //     freq[i]+=freq[i-1];
+        // }
+        // for(int i=nums.size()-1;i>=0;i--){
+        //     v[freq[nums[i]] - 1] = nums[i];
+        //     freq[nums[i]]--;
+        // }
+        // int ans=INT_MIN;
+        // for(int i=1;i<v.size();i++){
+        //     ans=max(ans,v[i]-v[i-1]);
+        // }
+        // return ans;
+        if(nums.size()<2){
+            return 0;
+        }
+        multiset<int> s;
+        for(auto i:nums){
+            s.insert(i);
+        }
+        vector<int> v;
+        for(auto i:s){
+            v.push_back(i);
+        }
+        int ans=INT_MIN;
+        for(int i=1;i<v.size();i++){
+            if(ans<(v[i]-v[i-1])){
+                ans=v[i]-v[i-1];
+            }
+        }
+        return ans;
+    }
+};
